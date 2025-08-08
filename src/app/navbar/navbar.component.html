@@ -1,0 +1,48 @@
+<nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <div class="container-custom">
+    <div style="display: flex; align-items: center; justify-content: space-between; height: 4rem; padding: 0 1rem;">
+      
+      <div>
+        <h1 class="text-gradient" style="font-size: 1.25rem; font-weight: bold; cursor: pointer;" (click)="scrollToSection('home')">
+          Prasad Shekhar Naik
+        </h1>
+      </div>
+
+      <div style="display: none;" class="desktop-nav">
+        <div style="display: flex; gap: 2rem;">
+          <a *ngFor="let item of navItems" (click)="scrollToSection(item.id)" style="padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; color: #374151;" [style.color]="activeSection === item.id ? '#3b82f6' : '#374151'" [style.background]="activeSection === item.id ? '#eff6ff' : 'transparent'">
+            {{ item.label }}
+          </a>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button (click)="onDarkModeToggle()" style="padding: 0.5rem; border-radius: 0.5rem; background: transparent; border: none; cursor: pointer; transition: background 0.3s ease;">
+          <i class="fas fa-moon"></i>
+        </button>
+
+        <button (click)="toggleMobileMenu()" style="padding: 0.5rem; border-radius: 0.5rem; background: transparent; border: none; cursor: pointer; display: block;" class="mobile-menu-btn">
+          <i class="fas fa-bars" *ngIf="!isMobileMenuOpen"></i>
+          <i class="fas fa-times" *ngIf="isMobileMenuOpen"></i>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="isMobileMenuOpen" style="padding: 1rem; background: white; border-top: 1px solid #e5e7eb;">
+      <a *ngFor="let item of navItems" (click)="scrollToSection(item.id)" style="display: block; padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; color: #374151; margin-bottom: 0.5rem;" [style.color]="activeSection === item.id ? '#3b82f6' : '#374151'" [style.background]="activeSection === item.id ? '#eff6ff' : 'transparent'">
+        {{ item.label }}
+      </a>
+    </div>
+  </div>
+</nav>
+
+<style>
+@media (min-width: 768px) {
+  .desktop-nav {
+    display: block !important;
+  }
+  .mobile-menu-btn {
+    display: none !important;
+  }
+}
+</style>

@@ -1,0 +1,77 @@
+<section class="section-padding bg-gray-50 dark:bg-dark-bg">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4 text-gradient">Certifications</h2>
+      <div class="w-24 h-1 bg-primary-600 mx-auto rounded-full"></div>
+      <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+        Professional certifications that validate my expertise in various technologies and methodologies
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div *ngFor="let cert of certifications; let i = index" 
+           class="card p-6 hover:shadow-xl transition-all duration-300 animate-fade-in"
+           [style.animation-delay.ms]="i * 200">
+        
+        <!-- Certification Icon -->
+        <div class="flex items-center justify-center mb-6">
+          <div class="w-20 h-20 rounded-full flex items-center justify-center shadow-lg"
+               [ngClass]="cert.color">
+            <i [class]="cert.icon + ' text-white text-3xl'"></i>
+          </div>
+        </div>
+
+        <!-- Certification Details -->
+        <div class="text-center mb-6">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 leading-tight">
+            {{ cert.title }}
+          </h3>
+          <p class="text-primary-600 font-semibold mb-1">{{ cert.issuer }}</p>
+          <p class="text-gray-500 dark:text-gray-400 text-sm">{{ cert.date }}</p>
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
+          {{ cert.description }}
+        </p>
+
+        <!-- Skills -->
+        <div class="mb-6">
+          <h4 class="font-semibold text-gray-900 dark:text-white mb-3 text-sm">Key Skills:</h4>
+          <div class="flex flex-wrap gap-2">
+            <span *ngFor="let skill of cert.skills" 
+                  class="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium">
+              {{ skill }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Credential ID -->
+        <div class="border-t dark:border-gray-700 pt-4">
+          <p class="text-xs text-gray-500 dark:text-gray-400">
+            <span class="font-medium">Credential ID:</span> {{ cert.credentialId }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="mt-16 text-center">
+      <div class="card p-8 max-w-2xl mx-auto">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          Continuous Learning
+        </h3>
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+          I believe in continuous learning and staying updated with the latest technologies. 
+          Currently pursuing additional certifications in Kubernetes (CKA) and AWS Solutions Architect.
+        </p>
+        <div class="mt-6">
+          <span class="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
+            <i class="fas fa-clock mr-2"></i>
+            More certifications coming soon...
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

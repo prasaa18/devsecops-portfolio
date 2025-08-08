@@ -1,0 +1,113 @@
+<section class="section-padding bg-gray-50 dark:bg-dark-bg">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4">
+        💻 <span class="text-gradient">GitHub</span> Repositories
+      </h2>
+      <div class="w-24 h-1 bg-primary-600 mx-auto rounded-full"></div>
+      <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+        Open source projects and contributions showcasing my work in DevSecOps, cloud automation, and secure development
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center py-12">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      <p class="text-gray-600 dark:text-gray-300 mt-4">Loading repositories...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="text-center py-12">
+      <i class="fas fa-exclamation-triangle text-red-500 text-4xl mb-4"></i>
+      <p class="text-gray-600 dark:text-gray-300">Unable to load repositories. Please try again later.</p>
+    </div>
+
+    <!-- Repositories Grid -->
+    <div *ngIf="!loading && !error" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let repo of repositories; let i = index" 
+           class="card p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in"
+           [style.animation-delay.ms]="i * 150">
+        
+        <!-- Repository Header -->
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center">
+            <i class="fas fa-folder text-primary-600 mr-2"></i>
+            <h3 class="font-semibold text-gray-900 dark:text-white truncate">
+              {{ repo.name }}
+            </h3>
+          </div>
+          <div class="flex items-center text-gray-500 dark:text-gray-400">
+            <i class="fas fa-star mr-1 text-yellow-500"></i>
+            <span class="text-sm">{{ repo.stargazers_count }}</span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed min-h-[3rem]">
+          {{ repo.description || 'No description available' }}
+        </p>
+
+        <!-- Topics/Tags -->
+        <div *ngIf="repo.topics && repo.topics.length > 0" class="mb-4">
+          <div class="flex flex-wrap gap-1">
+            <span *ngFor="let topic of repo.topics.slice(0, 3)" 
+                  class="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs">
+              {{ topic }}
+            </span>
+            <span *ngIf="repo.topics.length > 3" 
+                  class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-xs">
+              +{{ repo.topics.length - 3 }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="flex items-center justify-between pt-4 border-t dark:border-gray-700">
+          <!-- Language -->
+          <div *ngIf="repo.language" class="flex items-center">
+            <div class="w-3 h-3 rounded-full mr-2"
+                 [ngClass]="getLanguageColor(repo.language)"></div>
+            <span class="text-sm text-gray-600 dark:text-gray-300">{{ repo.language }}</span>
+          </div>
+          <div *ngIf="!repo.language" class="text-sm text-gray-400">No language</div>
+
+          <!-- View Repository Link -->
+          <a [href]="repo.html_url" 
+             target="_blank"
+             class="inline-flex items-center text-primary-600 hover:text-primary-700 text-sm font-medium transition-colors">
+            <i class="fas fa-external-link-alt mr-1"></i>
+            View
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- View All Repositories -->
+    <div class="text-center mt-12">
+      <a href="https://github.com/prasaa18?tab=repositories" 
+         target="_blank"
+         class="inline-flex items-center btn-primary">
+        <i class="fab fa-github mr-2"></i>
+        View All Repositories
+      </a>
+    </div>
+
+    <!-- GitHub Stats -->
+    <div class="mt-16">
+      <div class="card p-8 text-center max-w-2xl mx-auto">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          GitHub Activity
+        </h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">
+          Active contributor to open source projects with focus on DevSecOps tools, 
+          cloud automation, and security best practices.
+        </p>
+        <div class="flex justify-center">
+          <img src="https://github-readme-stats.vercel.app/api?username=prasaa18&show_icons=true&theme=default&hide_border=true" 
+               alt="GitHub Stats"
+               class="rounded-lg shadow-md dark:opacity-90">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

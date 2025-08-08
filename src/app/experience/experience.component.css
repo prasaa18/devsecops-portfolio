@@ -1,0 +1,4 @@
+/* Experience timeline animations */
+.timeline-item:hover {
+  transform: translateY(-5px);
+}

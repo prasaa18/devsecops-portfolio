@@ -1,0 +1,4 @@
+/* Contact form animations */
+.form-field:focus-within {
+  transform: translateY(-2px);
+}

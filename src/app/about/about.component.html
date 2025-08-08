@@ -1,0 +1,82 @@
+<section class="section-padding bg-white dark:bg-gray-900">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4 text-gradient">About Me</h2>
+      <div class="w-24 h-1 bg-primary-600 mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Content -->
+      <div class="animate-fade-in">
+        <h3 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">
+          Passionate DevSecOps Engineer & Cloud Architect
+        </h3>
+        
+        <div class="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+          <p>
+            With <strong>3.5+ years of experience</strong> in Java Development & DevSecOps practices, 
+            I'm currently working at <strong>Infosys</strong> where I focus on building secure, 
+            scalable cloud-native solutions.
+          </p>
+          
+          <p>
+            My expertise lies in implementing <strong>security-first development practices</strong>, 
+            automating CI/CD pipelines, and architecting robust microservices on AWS. I'm passionate 
+            about bridging the gap between development, security, and operations teams.
+          </p>
+          
+          <p>
+            I believe in continuous learning and staying updated with the latest technologies. 
+            My goal is to help organizations build secure, efficient, and scalable systems 
+            while maintaining the highest standards of code quality and security.
+          </p>
+        </div>
+
+        <!-- Key Highlights -->
+        <div class="mt-8">
+          <h4 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Key Highlights:</h4>
+          <ul class="space-y-2">
+            <li class="flex items-center text-gray-600 dark:text-gray-300">
+              <i class="fas fa-check-circle text-primary-600 mr-3"></i>
+              Expert in DevSecOps pipeline automation
+            </li>
+            <li class="flex items-center text-gray-600 dark:text-gray-300">
+              <i class="fas fa-check-circle text-primary-600 mr-3"></i>
+              AWS Certified Developer with hands-on experience
+            </li>
+            <li class="flex items-center text-gray-600 dark:text-gray-300">
+              <i class="fas fa-check-circle text-primary-600 mr-3"></i>
+              Proficient in Java, Spring Boot, and microservices
+            </li>
+            <li class="flex items-center text-gray-600 dark:text-gray-300">
+              <i class="fas fa-check-circle text-primary-600 mr-3"></i>
+              Security-focused development approach
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="animate-slide-up">
+        <div class="grid grid-cols-2 gap-6">
+          <div *ngFor="let stat of stats" 
+               class="card p-6 text-center hover:shadow-xl transition-all duration-300">
+            <div class="text-3xl font-bold text-primary-600 mb-2">{{ stat.number }}</div>
+            <div class="text-gray-600 dark:text-gray-300 font-medium">{{ stat.label }}</div>
+          </div>
+        </div>
+
+        <!-- Technologies I Love -->
+        <div class="mt-8 card p-6">
+          <h4 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Technologies I Love:</h4>
+          <div class="flex flex-wrap gap-2">
+            <span *ngFor="let tech of ['Java', 'Spring Boot', 'AWS', 'Docker', 'Kubernetes', 'Jenkins', 'Terraform', 'React']" 
+                  class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

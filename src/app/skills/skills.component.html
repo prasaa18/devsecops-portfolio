@@ -1,0 +1,57 @@
+<section class="section-padding bg-gray-50 dark:bg-dark-bg">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4 text-gradient">Skills & Expertise</h2>
+      <div class="w-24 h-1 bg-primary-600 mx-auto rounded-full"></div>
+      <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+        A comprehensive overview of my technical skills and proficiency levels across different domains
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <div *ngFor="let category of skillCategories; let i = index" 
+           class="card p-6 animate-fade-in"
+           [style.animation-delay.ms]="i * 200">
+        
+        <!-- Category Header -->
+        <div class="flex items-center mb-6">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center mr-4"
+               [ngClass]="category.color">
+            <i [class]="category.icon + ' text-white text-xl'"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            {{ category.title }}
+          </h3>
+        </div>
+
+        <!-- Skills List -->
+        <div class="space-y-4">
+          <div *ngFor="let skill of category.skills" class="skill-item">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-gray-700 dark:text-gray-300 font-medium">{{ skill.name }}</span>
+              <span class="text-primary-600 font-semibold">{{ skill.level }}%</span>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full transition-all duration-1000 ease-out"
+                   [style.width.%]="skill.level">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Skills Tags -->
+    <div class="mt-16 text-center">
+      <h3 class="text-2xl font-semibold mb-8 text-gray-900 dark:text-white">Additional Technologies</h3>
+      <div class="flex flex-wrap justify-center gap-3">
+        <span *ngFor="let tech of ['Fortify', '42Crunch', 'Nexus', 'Helm', 'S3', 'VPC', 'IAM', 'Beanstalk', 'Agile', 'VS Code']"
+              class="px-4 py-2 bg-white dark:bg-dark-card rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-gray-700 dark:text-gray-300 font-medium">
+          {{ tech }}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
