@@ -1,113 +1,20 @@
-<section class="section-padding bg-white dark:bg-gray-900">
-  <div class="container-custom">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">
-        📝 Technical <span class="text-gradient">Blog</span>
-      </h2>
-      <div class="w-24 h-1 bg-primary-600 mx-auto rounded-full"></div>
-      <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-        Insights, tutorials, and best practices in DevSecOps, cloud security, and modern software development
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <article *ngFor="let post of blogPosts; let i = index" 
-               class="card overflow-hidden group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in"
-               [style.animation-delay.ms]="i * 150">
-        
-        <!-- Featured Image -->
-        <div class="relative overflow-hidden">
-          <img [src]="post.image" 
-               [alt]="post.title"
-               class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </div>
-
-        <!-- Content -->
-        <div class="p-6">
-          <!-- Meta Info -->
-          <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-3">
-            <span class="flex items-center">
-              <i class="fas fa-calendar mr-2"></i>
-              {{ post.publishDate }}
-            </span>
-            <span class="flex items-center">
-              <i class="fas fa-clock mr-2"></i>
-              {{ post.readTime }}
-            </span>
+<section class="blog-section">
+  <div class="container">
+    <h2 class="section-title">Blog Posts</h2>
+    <div class="blog-grid">
+      <div class="blog-card" *ngFor="let post of blogPosts" (click)="openBlogPost(post.url)">
+        <div class="blog-content">
+          <h3 class="blog-title">{{ post.title }}</h3>
+          <p class="blog-description">{{ post.description }}</p>
+          <div class="blog-meta">
+            <span class="blog-date">{{ post.date | date:'MMM dd, yyyy' }}</span>
+            <div class="blog-tags">
+              <span class="tag" *ngFor="let tag of post.tags">{{ tag }}</span>
+            </div>
           </div>
-
-          <!-- Title -->
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-primary-600 transition-colors">
-            {{ post.title }}
-          </h3>
-
-          <!-- Excerpt -->
-          <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3">
-            {{ post.excerpt }}
-          </p>
-
-          <!-- Tags -->
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span *ngFor="let tag of post.tags.slice(0, 3)" 
-                  class="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium">
-              {{ tag }}
-            </span>
+          <div class="read-more">
+            <span>Read on Medium →</span>
           </div>
-
-          <!-- Read More -->
-          <a [href]="post.url" 
-             target="_blank"
-             class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors group">
-            Read More
-            <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-          </a>
-        </div>
-      </article>
-    </div>
-
-    <!-- Medium Profile -->
-    <div class="mt-16 text-center">
-      <div class="card p-8 max-w-2xl mx-auto">
-        <div class="flex items-center justify-center mb-4">
-          <div class="w-16 h-16 bg-black dark:bg-white rounded-full flex items-center justify-center mr-4">
-            <i class="fab fa-medium text-white dark:text-black text-2xl"></i>
-          </div>
-          <div class="text-left">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Medium Blog</h3>
-            <p class="text-gray-600 dark:text-gray-300">Technical Articles & Tutorials</p>
-          </div>
-        </div>
-        
-        <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-          Follow me on Medium for in-depth technical articles covering DevSecOps practices, 
-          cloud architecture patterns, and security best practices in modern software development.
-        </p>
-        
-        <a href="#" target="_blank" 
-           class="inline-flex items-center bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
-          <i class="fab fa-medium mr-2"></i>
-          Follow on Medium
-        </a>
-      </div>
-    </div>
-
-    <!-- Newsletter Signup -->
-    <div class="mt-12">
-      <div class="card p-8 text-center bg-gradient-to-r from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20">
-        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-          Stay Updated
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-md mx-auto">
-          Get notified when I publish new articles about DevSecOps, cloud security, and modern development practices.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-          <input type="email" 
-                 placeholder="Enter your email"
-                 class="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-          <button class="btn-primary whitespace-nowrap">
-            Subscribe
-          </button>
         </div>
       </div>
     </div>

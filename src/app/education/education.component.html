@@ -1,81 +1,17 @@
-<section class="section-padding bg-white dark:bg-gray-900">
-  <div class="container-custom">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4 text-gradient">Education</h2>
-      <div class="w-24 h-1 bg-primary-600 mx-auto rounded-full"></div>
-      <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-        My academic foundation in computer science and engineering
-      </p>
-    </div>
-
-    <div class="max-w-4xl mx-auto">
-      <!-- Main Education Card -->
-      <div class="card p-8 mb-12 animate-fade-in">
-        <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8">
-          
-          <!-- Education Icon -->
-          <div class="flex-shrink-0">
-            <div class="w-24 h-24 bg-gradient-to-br from-primary-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-              <i class="fas fa-graduation-cap text-white text-3xl"></i>
-            </div>
+<section class="education-section">
+  <div class="container">
+    <h2 class="section-title">Education</h2>
+    <div class="education-timeline">
+      <div class="education-item" *ngFor="let edu of education">
+        <div class="education-card">
+          <div class="education-header">
+            <h3 class="institution">{{ edu.institution }}</h3>
+            <span class="period">{{ edu.period }}</span>
           </div>
-
-          <!-- Education Details -->
-          <div class="flex-1 text-center lg:text-left">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              {{ education.degree }}
-            </h3>
-            <h4 class="text-xl text-primary-600 font-semibold mb-4">
-              {{ education.institution }}
-            </h4>
-            
-            <div class="grid md:grid-cols-3 gap-4 mb-6">
-              <div class="flex items-center justify-center lg:justify-start">
-                <i class="fas fa-calendar text-primary-600 mr-2"></i>
-                <span class="text-gray-600 dark:text-gray-300">{{ education.year }}</span>
-              </div>
-              <div class="flex items-center justify-center lg:justify-start">
-                <i class="fas fa-map-marker-alt text-primary-600 mr-2"></i>
-                <span class="text-gray-600 dark:text-gray-300">{{ education.location }}</span>
-              </div>
-              <div class="flex items-center justify-center lg:justify-start">
-                <i class="fas fa-star text-primary-600 mr-2"></i>
-                <span class="text-gray-600 dark:text-gray-300">CGPA: {{ education.cgpa }}</span>
-              </div>
-            </div>
-
-            <!-- Highlights -->
-            <div>
-              <h5 class="font-semibold text-gray-900 dark:text-white mb-3">Academic Highlights:</h5>
-              <ul class="space-y-2">
-                <li *ngFor="let highlight of education.highlights" 
-                    class="flex items-start text-gray-600 dark:text-gray-300">
-                  <i class="fas fa-chevron-right text-primary-600 mr-3 mt-1 text-sm"></i>
-                  <span>{{ highlight }}</span>
-                </li>
-              </ul>
-            </div>
+          <div class="education-details">
+            <p class="degree">{{ edu.degree }}</p>
+            <p class="grade">{{ edu.grade }}</p>
           </div>
-        </div>
-      </div>
-
-      <!-- Achievements -->
-      <div class="grid md:grid-cols-3 gap-6">
-        <div *ngFor="let achievement of achievements; let i = index" 
-             class="card p-6 text-center animate-slide-up"
-             [style.animation-delay.ms]="i * 200">
-          
-          <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i [class]="achievement.icon + ' text-primary-600 text-2xl'"></i>
-          </div>
-          
-          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-            {{ achievement.title }}
-          </h4>
-          
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-            {{ achievement.description }}
-          </p>
         </div>
       </div>
     </div>
