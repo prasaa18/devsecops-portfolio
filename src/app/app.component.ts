@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
+  styleUrls: ['./app.component.css'],
   template: `
     <nav>
       <div class="container">
@@ -9,8 +10,8 @@ import { Component, OnInit } from '@angular/core';
         <div style="display: flex; align-items: center; gap: 2rem;">
           <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
             <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#youtube">YouTube Videos</a></li>
@@ -29,33 +30,22 @@ import { Component, OnInit } from '@angular/core';
       <div class="container">
         <div class="hero-content fade-in">
           <div class="hero-text">
-            <h1>Hi, I'm <span class="text-gradient">Prasad</span></h1>
-            <p style="font-size: 1.3rem; font-weight: 600; color: var(--primary-color);">DevSecOps & Secure Cloud Engineer | Java & AWS Enthusiast | CI/CD Specialist</p>
-            <p>Welcome to my digital space! 3.5+ years of experience in building secure, scalable cloud-native solutions. Currently working at Infosys, passionate about secure cloud-native automation, CI/CD pipelines, and security-first development.</p>
-            <button class="btn" (click)="downloadResume()">
-              <i class="fas fa-download"></i> View Resume
-            </button>
+            <h1>Hi, I'm <span class="text-gradient">Prasad Shekhar Naik</span></h1>
+            <p style="font-size: 1.4rem; font-weight: 600; color: var(--primary-color); margin-bottom: 1.5rem;">DevSecOps Engineer | AWS Cloud Specialist | Security-First Developer</p>
+            <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem;">🚀 <strong>3.5+ years</strong> building secure, scalable cloud-native solutions at <strong>Infosys</strong></p>
+            <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">Specializing in CI/CD automation, container orchestration, and implementing security-first development practices across the entire software lifecycle.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn" (click)="downloadResume()">
+                <i class="fas fa-download"></i> View Resume
+              </button>
+              <a href="mailto:prasadsnaik18@gmail.com" class="btn" style="background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
+                <i class="fas fa-envelope"></i> Get In Touch
+              </a>
+            </div>
           </div>
           <div class="hero-image">
             <img src="assets/1000249455.jpg" alt="Prasad Shekhar Naik">
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section" style="background: var(--bg-color);">
-      <div class="container">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;" class="slide-up">
-          <span class="text-gradient">Professional Summary</span>
-        </h2>
-        <div class="card slide-up" style="max-width: 800px; margin: 0 auto; text-align: center;">
-          <p style="font-size: 1.1rem; line-height: 1.8;">
-            <strong>3.5+ years</strong> of experience in <strong>Java Development & DevSecOps practices</strong>. 
-            Currently working at <strong>Infosys</strong>, specializing in secure cloud-native automation, 
-            CI/CD pipeline implementation, and security-first development methodologies. 
-            Proven expertise in building scalable microservices, implementing DevSecOps workflows, 
-            and ensuring robust security practices across the software development lifecycle.
-          </p>
         </div>
       </div>
     </section>
@@ -125,19 +115,7 @@ import { Component, OnInit } from '@angular/core';
       </div>
     </section>
 
-    <section id="education" class="section">
-      <div class="container">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;" class="slide-up">
-          <span class="text-gradient">Education</span>
-        </h2>
-        <div class="card fade-in" style="max-width: 600px; margin: 0 auto; text-align: center;">
-          <i class="fas fa-graduation-cap" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
-          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">B.E. Computer Science</h3>
-          <h4 style="color: var(--primary-color); margin-bottom: 1rem;">East Point College of Engineering</h4>
-          <p style="color: #666;">CGPA: 7.9 / 10 | Year: 2020</p>
-        </div>
-      </div>
-    </section>
+    <app-education id="education"></app-education>
 
     <section id="certifications" class="section" style="background: #f8fafc;">
       <div class="container">
@@ -197,21 +175,7 @@ import { Component, OnInit } from '@angular/core';
       </div>
     </section>
 
-    <section id="blog" class="section">
-      <div class="container">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;" class="slide-up">
-          📝 Technical <span class="text-gradient">Blog</span>
-        </h2>
-        <div class="card fade-in" style="text-align: center;">
-          <i class="fab fa-medium" style="font-size: 3rem; color: #000; margin-bottom: 1rem;"></i>
-          <h3 style="margin-bottom: 1rem;">Medium Blog Integration</h3>
-          <p style="color: #666; margin-bottom: 2rem;">Technical articles and insights coming soon...</p>
-          <a href="#" target="_blank" class="btn">
-            <i class="fab fa-medium"></i> Follow on Medium
-          </a>
-        </div>
-      </div>
-    </section>
+    <app-blog id="blog"></app-blog>
 
     <section id="contact" class="section" style="background: #f8fafc;">
       <div class="container">
@@ -232,16 +196,16 @@ import { Component, OnInit } from '@angular/core';
               </div>
               <div style="margin-bottom: 2rem;">
                 <i class="fas fa-envelope" style="color: var(--primary-color); margin-right: 1rem; width: 20px;"></i>
-                <span>prasad.naik&#64;example.com</span>
+                <span>prasadsnaik18&#64;gmail.com</span>
               </div>
               <div style="display: flex; gap: 1rem;">
                 <a href="https://github.com/prasaa18" target="_blank" style="color: var(--primary-color); font-size: 1.5rem;">
                   <i class="fab fa-github"></i>
                 </a>
-                <a href="#" target="_blank" style="color: var(--primary-color); font-size: 1.5rem;">
+                <a href="https://www.linkedin.com/in/prasad-shekhar-naik" target="_blank" style="color: var(--primary-color); font-size: 1.5rem;">
                   <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="#" target="_blank" style="color: var(--primary-color); font-size: 1.5rem;">
+                <a href="https://www.youtube.com/@prasadsnaik18" target="_blank" style="color: var(--primary-color); font-size: 1.5rem;">
                   <i class="fab fa-youtube"></i>
                 </a>
               </div>
@@ -268,7 +232,7 @@ import { Component, OnInit } from '@angular/core';
           <a href="https://github.com/prasaa18" target="_blank" style="color: white; font-size: 1.5rem;">
             <i class="fab fa-github"></i>
           </a>
-          <a href="#" target="_blank" style="color: white; font-size: 1.5rem;">
+          <a href="https://www.linkedin.com/in/prasad-shekhar-naik" target="_blank" style="color: white; font-size: 1.5rem;">
             <i class="fab fa-linkedin"></i>
           </a>
           <a href="#" target="_blank" style="color: white; font-size: 1.5rem;">
@@ -394,8 +358,8 @@ export class AppComponent implements OnInit {
     {
       title: 'AWS Lift and Shift Deployment',
       description: 'Migrating applications to AWS using lift and shift strategy',
-      url: 'https://www.youtube.com/watch?v=8_Vq-kHXmIA',
-      thumbnail: 'https://img.youtube.com/vi/8_Vq-kHXmIA/maxresdefault.jpg'
+      url: 'https://youtu.be/8_Vq-kHXmIA',
+      thumbnail: 'https://img.youtube.com/vi/8_Vq-kHXmIA/hqdefault.jpg'
     },
     {
       title: 'Jenkins on EC2',
@@ -412,8 +376,8 @@ export class AppComponent implements OnInit {
     {
       title: 'ECS, ECR Continuous Deployment (Kannada)',
       description: 'Container deployment on AWS ECS with ECR in Kannada',
-      url: 'https://www.youtube.com/watch?v=K40BXrhU5Zo',
-      thumbnail: 'https://img.youtube.com/vi/K40BXrhU5Zo/maxresdefault.jpg'
+      url: 'https://youtu.be/K40BXrhU5Zo',
+      thumbnail: 'https://img.youtube.com/vi/K40BXrhU5Zo/hqdefault.jpg'
     }
   ];
 
