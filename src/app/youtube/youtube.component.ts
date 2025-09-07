@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class YoutubeComponent {
   videos = [
     {
-      title: 'Cafe Management End-to-End K8s Deployment with CI/CD & Security Scans',
+      title: 'https://youtu.be/ceD9REQ1ako?si=b7KraE-g5pOAHcDa',
       description: 'Complete walkthrough of deploying a full-stack Cafe Management application on Kubernetes with automated CI/CD pipeline and integrated security scanning',
       thumbnail: 'https://img.youtube.com/vi/ceD9REQ1ako/maxresdefault.jpg',
       videoId: 'ceD9REQ1ako',

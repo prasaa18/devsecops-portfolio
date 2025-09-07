@@ -13,7 +13,7 @@ export class ExperienceComponent {
       duration: 'Aug 2024 – Present',
       location: 'Bangalore, India',
       logo: 'fas fa-building',
-      description: 'Leading DevSecOps initiatives and API security compliance',
+      description: 'Leading DevSecOps initiatives, API security compliance, and vulnerability management',
       responsibilities: [
         'Performed 42Crunch API security scans on UAT and remediated Swagger specification issues and vulnerabilities flagged during testing, improving API compliance and release readiness',
         'Remediated vulnerabilities identified by SonarQube, Fortify, and 42Crunch across multiple microservices through prioritized fixes, reducing security blockers for production releases',
@@ -26,7 +26,7 @@ export class ExperienceComponent {
         'Performed Fortify upgrades and resolved critical vulnerabilities, maintaining security gates for smooth production deployments',
         'Led dependency vulnerability remediation efforts, performing daily checks and applying security patches to avoid release blockers'
       ],
-      technologies: ['42Crunch', 'SonarQube', 'Fortify', 'OWASP ZAP', 'Black Duck', 'Sysdig', 'Docker', 'Jenkins', 'GitHub Copilot', 'Jakarta EE']
+      technologies: ['42Crunch', 'SonarQube', 'Fortify', 'OWASP ZAP', 'Black Duck', 'Sysdig', 'Docker', 'Jenkins', 'GitHub Copilot', 'Gemini', 'Jakarta EE']
     },
     {
       company: 'Virtusa',
