@@ -283,13 +283,16 @@ export class AppComponent implements OnInit {
       duration: 'Aug 2024 – Present',
       location: 'Bangalore, India',
       responsibilities: [
-        'Automated Dynamic Application Security Testing (DAST) using OWASP ZAP and integrated API definitions into 42Crunch dashboards for continuous API security monitoring',
-        'Identified and remediated vulnerabilities flagged by Fortify, SonarQube, and 42Crunch, enhancing code quality and API security posture',
-        'Resolved SIT, UAT, and production issues related to business logic bugs, test failures, and performance bottlenecks',
-        'Improved test coverage by adding missing unit and integration test cases, reducing technical debt',
-        'Onboarded APIs to Apigee and participated in security reviews and threat modeling sessions',
+        'Performed 42Crunch API security scans on UAT and remediated Swagger specification issues and vulnerabilities flagged during testing, improving API compliance and release readiness',
+        'Remediated vulnerabilities identified by SonarQube, Fortify, and 42Crunch across multiple microservices through prioritized fixes, reducing security blockers for production releases',
+        'Automated DAST (OWASP ZAP) scanning and integrated DAST results into a central vulnerability dashboard; onboarded 3+ services to the dashboard and scheduled regular scans to enable continuous vulnerability tracking across 42Crunch, Black Duck (SCA), Fortify, and DAST tools',
+        'Monitored container security using the Sysdig plugin and performed dependency (SCA) scans with Black Duck; conducted manual security reviews prior to API onboarding to ensure minimal vulnerabilities at release',
+        'Increased code coverage to 80% by adding unit/integration tests and automating test generation using AI tools',
+        'Migrated services from Javax to Jakarta using AI-assisted tools (GitHub Copilot, Gemini), achieving seamless modernization with minimal downtime',
+        'Fixed SIT, UAT, and production issues by collaborating with QA and DevOps teams, accelerating release cycles',
         'Upgraded Docker images and resolved pod failures, Jenkins pipeline issues, and deployment errors',
-        'Ensured platform stability by troubleshooting CI/CD workflows and collaborating with QA and security teams'
+        'Performed Fortify upgrades and resolved critical vulnerabilities, maintaining security gates for smooth production deployments',
+        'Led dependency vulnerability remediation efforts, performing daily checks and applying security patches to avoid release blockers'
       ]
     },
     {
@@ -298,10 +301,10 @@ export class AppComponent implements OnInit {
       duration: 'Dec 2021 – Aug 2024',
       location: 'Chennai, India',
       responsibilities: [
-        'Developed secure REST APIs using Spring Boot with HMAC/RSA validation for payment systems',
-        'Integrated third-party APIs (e.g., Trustly), implemented business logic, and built reusable service components',
-        'Delivered deployments using AWS EC2 and S3 with minimal downtime',
-        'Participated in Agile ceremonies and contributed to production release cycles'
+        'Developed secure REST APIs in Spring Boot with HMAC/RSA validation for payments',
+        'Integrated third-party APIs (Trustly), implemented business logic and reusable service components',
+        'Delivered deployments using EC2 and S3 with minimal downtime',
+        'Participated in Agile ceremonies and production release cycles'
       ]
     }
   ];
@@ -309,26 +312,26 @@ export class AppComponent implements OnInit {
   projects = [
     {
       title: 'CI/CD Automation on AWS ECS & ECR',
-      description: 'Built CI/CD pipeline automating build, test, image packaging, and blue-green ECS deployment with GitHub Actions and Jenkins integration',
+      description: 'Built CI/CD pipeline automating build, test, image packaging, and blue-green ECS deployment. Integrated GitHub Actions and Jenkins to trigger pipeline stages with rollback support. Used ECR for container registry and EC2-based agents for secure build isolation.',
       technologies: ['Spring Boot', 'Docker', 'Jenkins', 'GitHub Actions', 'AWS ECS', 'ECR', 'EC2'],
       githubUrl: 'https://github.com/prasaa18'
     },
     {
-      title: 'GitOps Infrastructure with Terraform, Kubernetes, and Helm',
-      description: 'Provisioned cloud infrastructure using Terraform modules and implemented GitOps strategy with automated scans and secure release gates',
-      technologies: ['GitHub Actions', 'Terraform', 'Helm', 'SonarQube', 'AWS VPC', 'ECR', 'ECS'],
+      title: 'GitOps Infra with Terraform, Kubernetes, and Helm',
+      description: 'Provisioned AWS infrastructure (ECS, ECR, IAM, VPC) using Terraform and deployed microservices via Helm charts onto Kubernetes clusters. Built GitOps pipelines with GitHub Actions for infrastructure provisioning, application deployments, and rollback automation, enabling zero-downtime deployments. Integrated SonarQube into CI/CD pipelines to enforce code quality gates before production deployments.',
+      technologies: ['GitHub Actions', 'Terraform', 'Helm', 'SonarQube', 'Kubernetes', 'AWS VPC', 'ECR', 'ECS', 'IAM'],
       githubUrl: 'https://github.com/prasaa18'
     },
     {
       title: 'Cafe Management App',
-      description: 'Developed full-stack application with JWT authentication, CRUD operations, and admin dashboard deployed to AWS ECS',
-      technologies: ['Spring Boot', 'Angular', 'Jenkins', 'MySQL', 'Docker', 'ECS'],
+      description: 'Designed and deployed a full-stack Cafe Management Application (Java Spring Boot + Angular + MySQL) on AWS EKS using a multi-stage CI/CD + DevSecOps pipeline with separate pipelines for frontend & backend. Implemented GitOps workflows with GitHub Actions for Code → Build → Scan → Deploy → Notify automation. Integrated SonarQube, Trivy, Docker Scout for SAST, dependency checks, and image security. Automated Docker build & push to AWS ECR, Kubernetes deployments via Helm charts, with Ingress + Route53 DNS mapping.',
+      technologies: ['Spring Boot', 'Angular', 'MySQL', 'AWS EKS', 'GitHub Actions', 'SonarQube', 'Trivy', 'Docker Scout', 'Helm', 'Route53'],
       githubUrl: 'https://github.com/prasaa18'
     },
     {
       title: 'Microservices Architecture Demo',
-      description: 'Designed modular Order, Product, and Inventory services with Eureka service discovery and Resilience4j circuit breaking',
-      technologies: ['Spring Boot', 'Kafka', 'Docker Compose', 'Eureka', 'Resilience4j'],
+      description: 'Led the development of a microservices-based architecture for an application, integrating Order, Product, Inventory, and Notification Services. Enabled seamless communication between services, leveraging synchronous and asynchronous messaging. Implemented advanced features such as API Gateway, Service Discovery, and Circuit Breaker for fault tolerance. Containerized each microservice using Docker and orchestrated deployment with Docker Compose for scalability and portability.',
+      technologies: ['Spring Boot', 'Kafka', 'Docker Compose', 'API Gateway', 'Service Discovery', 'Circuit Breaker', 'Microservices'],
       githubUrl: 'https://github.com/prasaa18'
     }
   ];
@@ -384,6 +387,12 @@ export class AppComponent implements OnInit {
       description: 'Container deployment on AWS ECS with ECR in Kannada',
       url: 'https://youtu.be/K40BXrhU5Zo',
       thumbnail: 'https://img.youtube.com/vi/K40BXrhU5Zo/hqdefault.jpg'
+    },
+    {
+      title: 'Full stack Project for Devops CICD | Devsecops|AWS project in kannada',
+      description: 'Complete DevSecOps project tutorial in Kannada covering full-stack CI/CD implementation',
+      url: 'https://youtu.be/ceD9REQ1ako?si=b7KraE-g5pOAHcDa',
+      thumbnail: 'https://img.youtube.com/vi/ceD9REQ1ako/hqdefault.jpg'
     }
   ];
 
