@@ -17,7 +17,7 @@ export class ExperienceComponent {
       responsibilities: [
         'Performed 42Crunch API security scans on UAT and remediated Swagger specification issues and vulnerabilities flagged during testing, improving API compliance and release readiness',
         'Remediated vulnerabilities identified by SonarQube, Fortify, and 42Crunch across multiple microservices through prioritized fixes, reducing security blockers for production releases',
-        'Automated DAST (OWASP ZAP) scanning and integrated DAST results into a central vulnerability dashboard; onboarded 3+ services to the dashboard and scheduled regular scans to enable continuous vulnerability tracking across 42Crunch, Black Duck (SCA), Fortify, and DAST tools',
+        'Automated DAST (OWASP ZAP) scanning and integrated DAST results into a central vulnerability dashboard, onboarded 30+ services to the dashboard and scheduled regular scans to enable continuous vulnerability tracking across 42Crunch, Black Duck (SCA), Fortify, and DAST tools',
         'Monitored container security using the Sysdig plugin and performed dependency (SCA) scans with Black Duck; conducted manual security reviews prior to API onboarding to ensure minimal vulnerabilities at release',
         'Increased code coverage to 80% by adding unit/integration tests and automating test generation using AI tools',
         'Migrated services from Javax to Jakarta using AI-assisted tools (GitHub Copilot, Gemini), achieving seamless modernization with minimal downtime',
