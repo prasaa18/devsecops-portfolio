@@ -208,6 +208,9 @@ import { Component, OnInit } from '@angular/core';
                 <a href="https://www.youtube.com/@prasadsnaik18" target="_blank" style="color: var(--primary-color); font-size: 1.5rem;">
                   <i class="fab fa-youtube"></i>
                 </a>
+                <a href="https://www.instagram.com/bitsandbuilds18/" target="_blank" style="color: var(--primary-color); font-size: 1.5rem;">
+                  <i class="fab fa-instagram"></i>
+                </a>
               </div>
             </div>
             <div class="card fade-in">
@@ -235,8 +238,11 @@ import { Component, OnInit } from '@angular/core';
           <a href="https://www.linkedin.com/in/prasad-shekhar-naik" target="_blank" style="color: white; font-size: 1.5rem;">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="#" target="_blank" style="color: white; font-size: 1.5rem;">
+          <a href="https://medium.com/@prasadsnaik18" target="_blank" style="color: white; font-size: 1.5rem;">
             <i class="fab fa-medium"></i>
+          </a>
+          <a href="https://www.instagram.com/bitsandbuilds18/" target="_blank" style="color: white; font-size: 1.5rem;">
+            <i class="fab fa-instagram"></i>
           </a>
         </div>
         <p>&copy; 2024 Prasad Shekhar Naik. All rights reserved.</p>

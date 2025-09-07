@@ -28,10 +28,19 @@ export class HomeComponent implements OnInit {
   }
 
   downloadResume() {
-    const link = document.createElement('a');
-    link.href = 'assets/resume.pdf';
-    link.download = 'Prasad_Shekhar_Naik_Resume.pdf';
-    link.click();
+    try {
+      const link = document.createElement('a');
+      link.href = './assets/resume.pdf';
+      link.download = 'Prasad_Shekhar_Naik_Resume.pdf';
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      // Fallback: open in new tab
+      window.open('./assets/resume.pdf', '_blank');
+    }
   }
 
   scrollToContact() {

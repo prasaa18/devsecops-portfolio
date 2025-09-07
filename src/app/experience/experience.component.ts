@@ -8,22 +8,25 @@ import { Component } from '@angular/core';
 export class ExperienceComponent {
   experiences = [
     {
-      company: 'Infosys',
+      company: 'Infosys Ltd',
       position: 'Associate Consultant',
-      duration: '2021 - Present',
+      duration: 'Aug 2024 – Present',
       location: 'Bangalore, India',
       logo: 'fas fa-building',
-      description: 'Leading DevSecOps initiatives and cloud-native development',
+      description: 'Leading DevSecOps initiatives and API security compliance',
       responsibilities: [
-        'Designed and implemented secure CI/CD pipelines using Jenkins and GitHub Actions',
-        'Dockerized microservices and deployed them on AWS ECS/EKS clusters',
-        'Automated infrastructure provisioning using Terraform and Ansible',
-        'Integrated security scanning tools (SonarQube, Fortify, OWASP ZAP) into development workflows',
-        'Fixed critical security vulnerabilities and improved code quality metrics by 40%',
-        'Developed Spring Boot applications with REST APIs and microservices architecture',
-        'Implemented monitoring and logging solutions for production environments'
+        'Performed 42Crunch API security scans on UAT and remediated Swagger specification issues and vulnerabilities flagged during testing, improving API compliance and release readiness',
+        'Remediated vulnerabilities identified by SonarQube, Fortify, and 42Crunch across multiple microservices through prioritized fixes, reducing security blockers for production releases',
+        'Automated DAST (OWASP ZAP) scanning and integrated DAST results into a central vulnerability dashboard; onboarded 3+ services to the dashboard and scheduled regular scans to enable continuous vulnerability tracking across 42Crunch, Black Duck (SCA), Fortify, and DAST tools',
+        'Monitored container security using the Sysdig plugin and performed dependency (SCA) scans with Black Duck; conducted manual security reviews prior to API onboarding to ensure minimal vulnerabilities at release',
+        'Increased code coverage to 80% by adding unit/integration tests and automating test generation using AI tools',
+        'Migrated services from Javax to Jakarta using AI-assisted tools (GitHub Copilot, Gemini), achieving seamless modernization with minimal downtime',
+        'Fixed SIT, UAT, and production issues by collaborating with QA and DevOps teams, accelerating release cycles',
+        'Upgraded Docker images and resolved pod failures, Jenkins pipeline issues, and deployment errors',
+        'Performed Fortify upgrades and resolved critical vulnerabilities, maintaining security gates for smooth production deployments',
+        'Led dependency vulnerability remediation efforts, performing daily checks and applying security patches to avoid release blockers'
       ],
-      technologies: ['Java', 'Spring Boot', 'AWS', 'Docker', 'Kubernetes', 'Jenkins', 'Terraform', 'SonarQube']
+      technologies: ['42Crunch', 'SonarQube', 'Fortify', 'OWASP ZAP', 'Black Duck', 'Sysdig', 'Docker', 'Jenkins', 'GitHub Copilot', 'Jakarta EE']
     },
     {
       company: 'Virtusa',
