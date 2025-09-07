@@ -8,17 +8,16 @@ import { Component } from '@angular/core';
 export class ProjectsComponent {
   projects = [
     {
-      title: 'DevSecOps CI/CD Pipeline',
-      description: 'Complete automated pipeline with security scanning, testing, and deployment to AWS ECS',
-      image: 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=DevSecOps+Pipeline',
-      technologies: ['Jenkins', 'Docker', 'AWS ECS', 'SonarQube', 'Terraform'],
+      title: 'CI/CD Automation on AWS ECS & ECR',
+      description: 'Built CI/CD pipeline automating build, test, image packaging, and blue-green ECS deployment',
+      image: 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=CI/CD+ECS+ECR',
+      technologies: ['GitHub Actions', 'Jenkins', 'AWS ECS', 'AWS ECR', 'EC2', 'Docker'],
       githubUrl: 'https://github.com/prasaa18',
       liveUrl: '',
       features: [
-        'Automated security scanning with SAST/DAST tools',
-        'Infrastructure as Code with Terraform',
-        'Container orchestration with ECS',
-        'Slack notifications for pipeline status'
+        'Built CI/CD pipeline automating build, test, image packaging, and blue-green ECS deployment',
+        'Integrated GitHub Actions and Jenkins to trigger pipeline stages with rollback support',
+        'Used ECR for container registry and EC2-based agents for secure build isolation'
       ]
     },
     {
