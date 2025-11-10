@@ -72,25 +72,7 @@ import { Component, OnInit } from '@angular/core';
       </div>
     </section>
 
-    <section id="experience" class="section">
-      <div class="container">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;" class="slide-up">
-          <span class="text-gradient">Professional Experience</span>
-        </h2>
-        <div class="timeline">
-          <div *ngFor="let exp of experiences" class="timeline-item card fade-in">
-            <h3 style="color: var(--primary-color); font-size: 1.3rem;">{{exp.position}}</h3>
-            <h4 style="font-size: 1.1rem; margin: 0.5rem 0;">{{exp.company}}</h4>
-            <p style="color: #666; margin-bottom: 1rem;">{{exp.duration}} | {{exp.location}}</p>
-            <ul style="list-style-type: disc; padding-left: 1.5rem;">
-              <li *ngFor="let responsibility of exp.responsibilities" style="margin-bottom: 0.5rem;">
-                {{responsibility}}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+  <app-experience id="experience"></app-experience>
 
     <section id="projects" class="section" style="background: #f8fafc;">
       <div class="container">
@@ -276,38 +258,7 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  experiences = [
-    {
-      position: 'Associate Consultant',
-      company: 'Infosys Ltd',
-      duration: 'Aug 2024 – Present',
-      location: 'Bangalore, India',
-      responsibilities: [
-        'Performed 42Crunch API security scans on UAT and remediated Swagger specification issues and vulnerabilities flagged during testing, improving API compliance and release readiness',
-        'Remediated vulnerabilities identified by SonarQube, Fortify, and 42Crunch across multiple microservices through prioritized fixes, reducing security blockers for production releases',
-        'Automated DAST (OWASP ZAP) scanning and integrated DAST results into a central vulnerability dashboard; onboarded 3+ services to the dashboard and scheduled regular scans to enable continuous vulnerability tracking across 42Crunch, Black Duck (SCA), Fortify, and DAST tools',
-        'Monitored container security using the Sysdig plugin and performed dependency (SCA) scans with Black Duck; conducted manual security reviews prior to API onboarding to ensure minimal vulnerabilities at release',
-        'Increased code coverage to 80% by adding unit/integration tests and automating test generation using AI tools',
-        'Migrated services from Javax to Jakarta using AI-assisted tools (GitHub Copilot, Gemini), achieving seamless modernization with minimal downtime',
-        'Fixed SIT, UAT, and production issues by collaborating with QA and DevOps teams, accelerating release cycles',
-        'Upgraded Docker images and resolved pod failures, Jenkins pipeline issues, and deployment errors',
-        'Performed Fortify upgrades and resolved critical vulnerabilities, maintaining security gates for smooth production deployments',
-        'Led dependency vulnerability remediation efforts, performing daily checks and applying security patches to avoid release blockers'
-      ]
-    },
-    {
-      position: 'Associate Engineer',
-      company: 'Virtusa',
-      duration: 'Dec 2021 – Aug 2024',
-      location: 'Chennai, India',
-      responsibilities: [
-        'Developed secure REST APIs in Spring Boot with HMAC/RSA validation for payments',
-        'Integrated third-party APIs (Trustly), implemented business logic and reusable service components',
-        'Delivered deployments using EC2 and S3 with minimal downtime',
-        'Participated in Agile ceremonies and production release cycles'
-      ]
-    }
-  ];
+  // experiences moved to ExperienceComponent
 
   projects = [
     {

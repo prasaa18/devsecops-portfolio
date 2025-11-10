@@ -2,3 +2,24 @@
 .timeline-item:hover {
   transform: translateY(-5px);
 }
+
+/* Ensure responsibilities align and have comfortable line-height */
+.card ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+.card ul li span {
+  display: inline-block;
+  line-height: 1.6;
+}
+
+/* Keep timeline dot centered vertically for each card */
+.timeline-dot-fix {
+  top: 1.1rem;
+}
+
+/* Minimal color behavior: let global theme variables handle colors */
+.card {
+  color: var(--text-color);
+}
