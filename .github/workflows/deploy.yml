@@ -2,7 +2,7 @@ name: Build, Security Scan & Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   build-scan-deploy:
-
     runs-on: ubuntu-latest
 
     environment:
@@ -20,158 +19,151 @@ jobs:
 
     steps:
 
-    # --------------------------------------------------
-    # 1. Checkout
-    # --------------------------------------------------
-    - name: Checkout
-      uses: actions/checkout@v4
+      # ==================================================
+      # 1. CHECKOUT
+      # ==================================================
+      - name: Checkout
+        uses: actions/checkout@v4
 
 
-    # --------------------------------------------------
-    # 2. Setup Node
-    # --------------------------------------------------
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+      # ==================================================
+      # 2. SETUP NODE
+      # ==================================================
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
 
-    # --------------------------------------------------
-    # 3. Install dependencies
-    # --------------------------------------------------
-    - name: Install dependencies
-      run: npm ci
+      # ==================================================
+      # 3. INSTALL DEPENDENCIES
+      # ==================================================
+      - name: Install dependencies
+        run: npm ci
 
 
-    # --------------------------------------------------
-    # 4. Build Angular
-    # --------------------------------------------------
-    - name: Build Angular
-      run: npx ng build --configuration production
+      # ==================================================
+      # 4. BUILD ANGULAR
+      # ==================================================
+      - name: Build Angular
+        run: npx ng build --configuration production
 
 
-    # ==================================================
-    # TRIVY
-    # ==================================================
+      # ==================================================
+      # TRIVY
+      # ==================================================
 
-    # --------------------------------------------------
-    # 5. Install Trivy
-    # --------------------------------------------------
-    - name: Install Trivy
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget apt-transport-https gnupg lsb-release
+      # --------------------------------------------------
+      # 5. INSTALL TRIVY
+      # --------------------------------------------------
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget apt-transport-https gnupg lsb-release
 
-        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key \
-          | gpg --dearmor \
-          | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key \
+            | gpg --dearmor \
+            | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
 
-        echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] \
-          https://aquasecurity.github.io/trivy-repo/deb \
-          $(lsb_release -sc) main" \
-          | sudo tee /etc/apt/sources.list.d/trivy.list
+          echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" \
+            | sudo tee /etc/apt/sources.list.d/trivy.list
 
-        sudo apt-get update
-        sudo apt-get install -y trivy
+          sudo apt-get update
+          sudo apt-get install -y trivy
 
 
-    # --------------------------------------------------
-    # 6. Run Trivy filesystem scan
-    # --------------------------------------------------
-    - name: Run Trivy Security Scan
-      run: |
-        trivy fs \
-          --format json \
-          --output trivy-report.json \
-          --severity HIGH,CRITICAL \
-          .
+      # --------------------------------------------------
+      # 6. RUN TRIVY FILESYSTEM SCAN
+      # --------------------------------------------------
+      - name: Run Trivy Security Scan
+        run: |
+          trivy fs \
+            --format json \
+            --output trivy-report.json \
+            --severity HIGH,CRITICAL \
+            .
 
 
-    # ==================================================
-    # SNYK
-    # ==================================================
+      # ==================================================
+      # SNYK
+      # ==================================================
 
-    # --------------------------------------------------
-    # 7. Setup Node/npm Snyk
-    # --------------------------------------------------
-    - name: Install Snyk
-      run: npm install -g snyk
-
-
-    # --------------------------------------------------
-    # 8. Authenticate Snyk
-    # --------------------------------------------------
-    - name: Authenticate Snyk
-      run: snyk auth "${{ secrets.SNYK_TOKEN }}"
+      # --------------------------------------------------
+      # 7. INSTALL SNYK
+      # --------------------------------------------------
+      - name: Install Snyk
+        run: npm install -g snyk
 
 
-    # --------------------------------------------------
-    # 9. Run Snyk dependency scan
-    # --------------------------------------------------
-    - name: Run Snyk Scan
-      run: |
-        snyk test \
-          --json \
-          > snyk-report.json
-      continue-on-error: true
+      # --------------------------------------------------
+      # 8. RUN SNYK DEPENDENCY SCAN
+      # --------------------------------------------------
+      - name: Run Snyk Security Scan
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          snyk test \
+            --json \
+            > snyk-report.json
+        continue-on-error: true
 
 
-    # ==================================================
-    # SEND REPORTS TO SECURITY INTELLIGENCE PLATFORM
-    # ==================================================
+      # ==================================================
+      # SEND REPORTS TO SECURITY INTELLIGENCE PLATFORM
+      # ==================================================
 
-    # --------------------------------------------------
-    # 10. Upload Trivy report
-    # --------------------------------------------------
-    - name: Upload Trivy Report
-      run: |
-        curl --fail-with-body \
-          -X POST \
-          "${{ secrets.SECURITY_INTEL_API_URL }}/integrations/scans/github-actions" \
-          -H "Authorization: Bearer ${{ secrets.SCAN_INGESTION_TOKEN }}" \
-          -F "file=@trivy-report.json" \
-          -F "serviceName=devsecops-portfolio" \
-          -F "environment=PRODUCTION"
-
-
-    # --------------------------------------------------
-    # 11. Upload Snyk report
-    # --------------------------------------------------
-    - name: Upload Snyk Report
-      run: |
-        curl --fail-with-body \
-          -X POST \
-          "${{ secrets.SECURITY_INTEL_API_URL }}/integrations/scans/github-actions" \
-          -H "Authorization: Bearer ${{ secrets.SCAN_INGESTION_TOKEN }}" \
-          -F "file=@snyk-report.json" \
-          -F "serviceName=devsecops-portfolio" \
-          -F "environment=PRODUCTION"
+      # --------------------------------------------------
+      # 9. UPLOAD TRIVY REPORT
+      # --------------------------------------------------
+      - name: Upload Trivy Report
+        run: |
+          curl --fail-with-body \
+            -X POST \
+            "${{ secrets.SECURITY_INTEL_API_URL }}/integrations/scans/github-actions" \
+            -H "Authorization: Bearer ${{ secrets.SCAN_INGESTION_TOKEN }}" \
+            -F "file=@trivy-report.json" \
+            -F "serviceName=devsecops-portfolio" \
+            -F "environment=PRODUCTION"
 
 
-    # ==================================================
-    # GITHUB PAGES
-    # ==================================================
-
-    # --------------------------------------------------
-    # 12. Setup Pages
-    # --------------------------------------------------
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-
-
-    # --------------------------------------------------
-    # 13. Upload Pages artifact
-    # --------------------------------------------------
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: ./dist/devsecops-portfolio
+      # --------------------------------------------------
+      # 10. UPLOAD SNYK REPORT
+      # --------------------------------------------------
+      - name: Upload Snyk Report
+        run: |
+          curl --fail-with-body \
+            -X POST \
+            "${{ secrets.SECURITY_INTEL_API_URL }}/integrations/scans/github-actions" \
+            -H "Authorization: Bearer ${{ secrets.SCAN_INGESTION_TOKEN }}" \
+            -F "file=@snyk-report.json" \
+            -F "serviceName=devsecops-portfolio" \
+            -F "environment=PRODUCTION"
 
 
-    # --------------------------------------------------
-    # 14. Deploy
-    # --------------------------------------------------
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+      # ==================================================
+      # GITHUB PAGES
+      # ==================================================
+
+      # --------------------------------------------------
+      # 11. SETUP PAGES
+      # --------------------------------------------------
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+
+      # --------------------------------------------------
+      # 12. UPLOAD PAGE ARTIFACT
+      # --------------------------------------------------
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist/devsecops-portfolio
+
+
+      # --------------------------------------------------
+      # 13. DEPLOY TO GITHUB PAGES
+      # --------------------------------------------------
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
