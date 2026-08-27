@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages + Security Scans
 
 on:
   push:
@@ -10,36 +10,207 @@ permissions:
   id-token: write
 
 jobs:
-  build-and-deploy:
+  build-scan-and-deploy:
+
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
+
+    # --------------------------------------------------
+    # 1. Checkout source code
+    # --------------------------------------------------
     - name: Checkout
       uses: actions/checkout@v4
-    
+
+
+    # --------------------------------------------------
+    # 2. Setup Node.js
+    # --------------------------------------------------
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
         cache: 'npm'
-    
+
+
+    # --------------------------------------------------
+    # 3. Install dependencies
+    # --------------------------------------------------
     - name: Install dependencies
       run: npm ci
-    
+
+
+    # --------------------------------------------------
+    # 4. Install Trivy
+    # --------------------------------------------------
+    - name: Install Trivy
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget apt-transport-https gnupg lsb-release
+
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key \
+          | gpg --dearmor \
+          | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+
+        echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] \
+          https://aquasecurity.github.io/trivy-repo/deb \
+          $(lsb_release -sc) main" \
+          | sudo tee /etc/apt/sources.list.d/trivy.list
+
+        sudo apt-get update
+        sudo apt-get install -y trivy
+
+        trivy --version
+
+
+    # --------------------------------------------------
+    # 5. Run Trivy filesystem scan
+    # --------------------------------------------------
+    - name: Run Trivy Scan
+      continue-on-error: true
+      run: |
+        mkdir -p security-reports
+
+        trivy fs \
+          --format json \
+          --output security-reports/trivy-report.json \
+          --scanners vuln,secret,misconfig \
+          .
+
+        echo "Trivy scan completed"
+
+        ls -lh security-reports/trivy-report.json
+
+
+    # --------------------------------------------------
+    # 6. Install Snyk
+    # --------------------------------------------------
+    - name: Install Snyk
+      run: |
+        npm install -g snyk
+        snyk --version
+
+
+    # --------------------------------------------------
+    # 7. Authenticate Snyk
+    # --------------------------------------------------
+    - name: Authenticate Snyk
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      run: |
+        snyk auth "$SNYK_TOKEN"
+
+
+    # --------------------------------------------------
+    # 8. Run Snyk dependency scan
+    # --------------------------------------------------
+    - name: Run Snyk Scan
+      continue-on-error: true
+      run: |
+        mkdir -p security-reports
+
+        snyk test \
+          --all-projects \
+          --json-file-output=security-reports/snyk-report.json \
+          || true
+
+        echo "Snyk scan completed"
+
+        ls -lh security-reports/snyk-report.json
+
+
+    # --------------------------------------------------
+    # 9. Check Security Intelligence Platform
+    # --------------------------------------------------
+    - name: Check Security Intelligence Platform
+      env:
+        SECURITY_INTEL_API_URL: ${{ secrets.SECURITY_INTEL_API_URL }}
+      run: |
+        echo "Checking Security Intelligence Platform..."
+
+        curl --fail --silent --show-error \
+          "$SECURITY_INTEL_API_URL/integrations/scans/github-actions/health"
+
+        echo "Security Intelligence Platform is reachable"
+
+
+    # --------------------------------------------------
+    # 10. Upload Trivy report to Security Intelligence
+    # --------------------------------------------------
+    - name: Upload Trivy Report
+      continue-on-error: true
+      env:
+        SECURITY_INTEL_API_URL: ${{ secrets.SECURITY_INTEL_API_URL }}
+        SCAN_INGESTION_TOKEN: ${{ secrets.SCAN_INGESTION_TOKEN }}
+      run: |
+        echo "Uploading Trivy report..."
+
+        curl --fail-with-body \
+          -X POST \
+          "$SECURITY_INTEL_API_URL/integrations/scans/github-actions" \
+          -H "Authorization: Bearer $SCAN_INGESTION_TOKEN" \
+          -F "file=@security-reports/trivy-report.json" \
+          -F "serviceName=devsecops-portfolio" \
+          -F "environment=PRODUCTION" \
+          -F "tool=TRIVY"
+
+        echo "Trivy report uploaded successfully"
+
+
+    # --------------------------------------------------
+    # 11. Upload Snyk report to Security Intelligence
+    # --------------------------------------------------
+    - name: Upload Snyk Report
+      continue-on-error: true
+      env:
+        SECURITY_INTEL_API_URL: ${{ secrets.SECURITY_INTEL_API_URL }}
+        SCAN_INGESTION_TOKEN: ${{ secrets.SCAN_INGESTION_TOKEN }}
+      run: |
+        echo "Uploading Snyk report..."
+
+        curl --fail-with-body \
+          -X POST \
+          "$SECURITY_INTEL_API_URL/integrations/scans/github-actions" \
+          -H "Authorization: Bearer $SCAN_INGESTION_TOKEN" \
+          -F "file=@security-reports/snyk-report.json" \
+          -F "serviceName=devsecops-portfolio" \
+          -F "environment=PRODUCTION" \
+          -F "tool=SNYK"
+
+        echo "Snyk report uploaded successfully"
+
+
+    # --------------------------------------------------
+    # 12. Build Angular application
+    # --------------------------------------------------
     - name: Build
-      run: npx ng build --configuration production
-    
+      run: |
+        npx ng build --configuration production
+
+
+    # --------------------------------------------------
+    # 13. Setup GitHub Pages
+    # --------------------------------------------------
     - name: Setup Pages
       uses: actions/configure-pages@v4
-    
+
+
+    # --------------------------------------------------
+    # 14. Upload Pages artifact
+    # --------------------------------------------------
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: ./dist/devsecops-portfolio
-    
+
+
+    # --------------------------------------------------
+    # 15. Deploy to GitHub Pages
+    # --------------------------------------------------
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
